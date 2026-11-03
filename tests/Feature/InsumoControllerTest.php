@@ -31,6 +31,7 @@ class InsumoControllerTest extends TestCase
 
         $this->get(route('insumos.index'))
             ->assertOk()
+            ->assertSee('Listado de insumos')
             ->assertViewHas('insumos', fn ($p) => $p->count() === 10 && $p->total() === 12);
     }
 
