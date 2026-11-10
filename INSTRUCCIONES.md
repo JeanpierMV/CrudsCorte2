@@ -45,7 +45,7 @@ $this->call([
 
 1. Inicia el servicio **MySQL** desde el panel de XAMPP.
 2. Abre `http://localhost/phpmyadmin` y crea una base de datos llamada `crudscorte2`.
-3. En el archivo `.env` de Laravel, configura la conexión (ajusta `DB_PASSWORD` si tu usuario MySQL tiene contraseña):
+3. En el archivo `.env` de Laravel, configura la conexión :
    ```dotenv
    DB_CONNECTION=mysql
    DB_HOST=127.0.0.1
@@ -54,13 +54,13 @@ $this->call([
    DB_USERNAME=root
    DB_PASSWORD=
    ```
-4. Desde la carpeta del proyecto, ejecuta:
+4. Desde la carpeta del proyecto, ejecutar:
    ```powershell
    php artisan config:clear
    php artisan migrate --seed
    ```
 
-Las migraciones crean las tablas y `--seed` agrega datos iniciales. SQLite y MySQL son bases separadas: estos pasos no copian a MySQL los datos que ya existan en SQLite. No uses `migrate:fresh` si quieres conservar datos, porque elimina las tablas. No compartas ni subas `.env`; contiene la configuración local de la aplicación.
+Las migraciones crean las tablas y `--seed` agrega datos iniciales. SQLite y MySQL son bases separadas: estos pasos no copian a MySQL los datos que ya existan en SQLite. No uses `migrate:fresh` si quieres conservar datos, porque elimina las tablas. No compartit ni subir el `.env`; contiene la configuración local de la aplicación.
 
 ## 4. Probar
 ```bash
