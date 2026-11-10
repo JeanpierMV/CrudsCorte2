@@ -8,10 +8,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+<body class="app-shell">
+<nav class="navbar navbar-expand-lg navbar-light bg-white mb-4 app-navbar">
     <div class="container">
-        <a class="navbar-brand" href="{{ route('dashboard') }}">{{ config('app.name', 'CrudsCorte2') }}</a>
+        <a class="navbar-brand d-flex align-items-center gap-2" href="{{ route('dashboard') }}">
+            <span class="app-brand-logo"><img src="{{ asset('images/don-abe-urban-food.png') }}" alt="Logo de Don Abe Urban Food"></span>
+            <span>DON ABE <span class="app-brand-accent">URBAN FOOD</span></span>
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-navigation"
                 aria-controls="main-navigation" aria-expanded="false" aria-label="Mostrar navegación">
             <span class="navbar-toggler-icon"></span>
