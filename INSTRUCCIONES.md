@@ -12,8 +12,8 @@ Archivos nuevos (no pisan nada del repo):
 
 ## 1. Copiar al proyecto
 ```bash
-git clone https://github.com/AnyeloChitan/crudEjemplo.git      # si aún no lo tienes
-cd crudEjemplo
+git clone https://github.com/JeanpierMV/CrudsCorte2.git      # si aún no lo tienes
+cd CrudsCorte2
 git pull origin main
 git checkout -b feature/crud-insumos
 # copia el CONTENIDO de esta carpeta dentro del proyecto (respeta las rutas)
