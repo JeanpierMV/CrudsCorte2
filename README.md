@@ -23,6 +23,8 @@ npm run build
 php artisan serve
 ```
 
+Las sesiones se guardan en archivos (`SESSION_DRIVER=file`) para que los mensajes de error y los datos del formulario sigan disponibles si falla la base de datos.
+
 Abre `http://127.0.0.1:8000/register` para crear una cuenta. Las cuentas nuevas tienen permisos de consulta. Para dar permisos de administrador a una cuenta:
 
 ```powershell
