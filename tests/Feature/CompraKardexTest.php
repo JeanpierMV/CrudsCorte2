@@ -10,6 +10,7 @@ use Database\Seeders\CompraPermisosSeeder;
 use Database\Seeders\InsumoPermisosSeeder;
 use Database\Seeders\ProveedorPermisosSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
 class CompraKardexTest extends TestCase
@@ -57,6 +58,22 @@ class CompraKardexTest extends TestCase
         $this->assertDatabaseHas('kardex', [
             'insumo_id' => $insumo->id, 'stock_anterior' => 144, 'stock_nuevo' => 154, 'tipo' => 'COMPRA',
         ]);
+    }
+
+    public function test_fallo_de_base_de_datos_muestra_mensaje_y_revierte_la_compra(): void
+    {
+        $insumo = Insumo::factory()->create(['stock_actual' => 50]);
+        $proveedor = Proveedor::factory()->create();
+        DB::unprepared("CREATE TRIGGER fail_kardex_insert BEFORE INSERT ON kardex BEGIN SELECT RAISE(ABORT, 'fallo simulado'); END");
+
+        $this->post(route('compras.store'), $this->datosCompra($insumo, $proveedor))
+            ->assertStatus(503)
+            ->assertSee('problema con la base de datos')
+            ->assertSessionHas('_old_input', fn (array $input) => $input['cantidad'] == 10);
+
+        $this->assertDatabaseCount('compras', 0);
+        $this->assertDatabaseHas('insumos', ['id' => $insumo->id, 'stock_actual' => 50]);
+        $this->assertDatabaseCount('kardex', 0);
     }
 
     public function test_rechaza_cantidad_vacia_cero_o_texto(): void
